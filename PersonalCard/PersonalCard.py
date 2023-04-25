@@ -13,6 +13,7 @@ from PIL import Image
 from pathlib import Path
 from threading import Thread
 import time
+
 class PersonalCard:
     def __init__(self,
                  lang: Language = Language.MIX,
@@ -230,6 +231,10 @@ class PersonalCard:
     def extract_front_info_deploy(self, image):
         self.image_scan = image
         return self.__extractItems()
+    
+    def extract_front_info_deploy(self, image):
+        self.image_scan = image
+        return self.__extractItemsSep()
 
     def extract_back_info(self, image):
         self.image = self.__readImage(image)

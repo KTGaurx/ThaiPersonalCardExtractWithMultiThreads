@@ -232,7 +232,7 @@ class PersonalCard:
         self.image_scan = image
         return self.__extractItems()
     
-    def extract_front_info_deploy(self, image):
+    def extract_front_info_deploySep(self, image):
         self.image_scan = image
         return self.__extractItemsSep()
 

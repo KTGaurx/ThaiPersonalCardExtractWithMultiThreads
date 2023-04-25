@@ -1,2 +1,1 @@
 # ThaiPersonalCardExtractWithMultiThreads
-# ThaiPersonalCardExtractWithMultiThreads

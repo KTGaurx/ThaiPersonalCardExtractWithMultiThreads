@@ -282,6 +282,7 @@ class PersonalCard:
         return _card    
     
     def __extractSep(self, side: Card = Card.FRONT_TEMPLATE, num = 0):
+        start = time.time()
         box = self.roi_extract["roi_extract"][str(side)] if str(self.lang) == str(Language.MIX) else filter(lambda item: str(self.lang) in item["lang"],self.roi_extract["roi_extract"])
         imgCrop = self.image_scan[box[num]["point"][1]:box[num]["point"][3], box[num]["point"][0]:box[num]["point"][2]]
         imgCrop = cv2.adaptiveThreshold(imgCrop[:,:,0], 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 8) + cv2.adaptiveThreshold(imgCrop[:,:,1], 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 8) + cv2.adaptiveThreshold(imgCrop[:,:,2], 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 11, 8)
@@ -319,3 +320,5 @@ class PersonalCard:
 
         if self.save_extract_result:
             Image.fromarray(imgCrop).save(os.path.join(self.path_to_save, f'{box[num]["name"]}.jpg'), compress_level=3)
+        end = time.time()
+        print("Threads :",num,"Time to Process:",( end - start ))

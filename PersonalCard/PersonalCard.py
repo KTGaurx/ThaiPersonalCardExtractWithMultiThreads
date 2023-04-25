@@ -12,7 +12,7 @@ import easyocr
 from PIL import Image
 from pathlib import Path
 from threading import Thread
-
+import time
 class PersonalCard:
     def __init__(self,
                  lang: Language = Language.MIX,
@@ -152,7 +152,7 @@ class PersonalCard:
             cv2.imwrite(os.path.join(self.path_to_save, 'image_scan.jpg'), self.image_scan)
 
     def __extractItems(self, side: Card = Card.FRONT_TEMPLATE):
-        
+        start = time.time()
         for index, box in enumerate(self.roi_extract["roi_extract"][str(side)] if str(self.lang) == str(Language.MIX) else filter(lambda item: str(self.lang) in item["lang"],self.roi_extract["roi_extract"])):
             
             imgCrop = self.image_scan[box["point"][1]:box["point"][3], box["point"][0]:box["point"][2]]
@@ -191,7 +191,8 @@ class PersonalCard:
 
             if self.save_extract_result:
                 Image.fromarray(imgCrop).save(os.path.join(self.path_to_save, f'{box["name"]}.jpg'), compress_level=3)
-
+        end = time.time()
+        print(end-start)
         if str(self.lang) == str(Language.MIX) and str(side) == str(Card.FRONT_TEMPLATE):
             extract_th = self.cardInfo[str(self.lang)]["FullNameTH"].split(' ')
             self.cardInfo[str(self.lang)]["PrefixTH"] = str("".join(extract_th[0]))
@@ -228,7 +229,7 @@ class PersonalCard:
         
     def extract_front_info_deploy(self, image):
         self.image_scan = image
-        return self.__extractItemsSep()
+        return self.__extractItems()
 
     def extract_back_info(self, image):
         self.image = self.__readImage(image)
@@ -238,6 +239,7 @@ class PersonalCard:
         return self.__extractItems(side = Card.BACK_TEMPLATE)
 
     def __extractItemsSep(self, side: Card = Card.FRONT_TEMPLATE):
+        start = time.time()
         threads = []
         for i in range(12):
             t = Thread(target=self.__extractSep,args=(Card.FRONT_TEMPLATE,i))
@@ -245,6 +247,8 @@ class PersonalCard:
             t.start()
         for t in threads:
             t.join()
+        end = time.time()
+        print(end-start)
         if str(self.lang) == str(Language.MIX) and str(side) == str(Card.FRONT_TEMPLATE):
             extract_th = self.cardInfo[str(self.lang)]["FullNameTH"].split(' ')
             self.cardInfo[str(self.lang)]["PrefixTH"] = str("".join(extract_th[0]))

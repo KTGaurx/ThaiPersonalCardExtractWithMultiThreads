@@ -1,0 +1,79 @@
+{
+  "roi_extract": [
+    {
+      "point": [
+        298,
+        20,
+        519,
+        65
+      ],
+      "type": "text",
+      "name": "LotteryNumber",
+      "lang": "",
+      "tesseract_config": "",
+      "blocklist": "",
+      "allowlist": "",
+      "provider": ""
+    },
+    {
+      "point": [
+        308,
+        84,
+        510,
+        113
+      ],
+      "type": "text",
+      "name": "DateLesson",
+      "lang": "",
+      "tesseract_config": "",
+      "blocklist": "",
+      "allowlist": "",
+      "provider": ""
+    },
+    {
+      "point": [
+        364,
+        178,
+        406,
+        212
+      ],
+      "type": "text",
+      "name": "LessonNumber",
+      "lang": "",
+      "tesseract_config": "",
+      "blocklist": "",
+      "allowlist": "",
+      "provider": ""
+    },
+    {
+      "point": [
+        466,
+        172,
+        524,
+        213
+      ],
+      "type": "text",
+      "name": "SetNumber",
+      "lang": "",
+      "tesseract_config": "",
+      "blocklist": "",
+      "allowlist": "",
+      "provider": ""
+    },
+    {
+      "point": [
+        220,
+        33,
+        353,
+        145
+      ],
+      "type": "text",
+      "name": "Qrcode",
+      "lang": "",
+      "tesseract_config": "",
+      "blocklist": "",
+      "allowlist": "",
+      "provider": "qrcode"
+    }
+  ]
+}
